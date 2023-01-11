@@ -41,7 +41,7 @@ class KeyPoller():
         else:
             termios.tcsetattr(self.fd, termios.TCSAFLUSH, self.old_term)
 
-    def pollasz(self):
+    def poll(self):
         if isWindows:
             if not len(self.capturedChars) == 0:
                 return self.capturedChars.pop(0)

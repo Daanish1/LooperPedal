@@ -1,7 +1,5 @@
 # This file is testing a variable sized recording loop and
 # the ability to stop the loop and start playback
-import argparse
-import tempfile
 import queue
 import sys
 
@@ -25,7 +23,6 @@ with sd.InputStream(samplerate=samplerate, channels=channels,
     callback=callback):
     with KeyPoller() as keyPoller:
         while True:
-            # file.write(q.get())
             test.append(q.get())
             c = keyPoller.poll()
             if not c is None:
