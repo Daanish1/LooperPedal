@@ -8,11 +8,11 @@ import sys
 import sounddevice as sd
 import soundfile as sf
 import numpy as np
-from getkey import getkey, keys
+from KeyPoller import KeyPoller
+
 
 samplerate = 44100
 channels = 1
-filename = "test.WAV"
 q = queue.Queue()
 
 test = []
@@ -23,18 +23,27 @@ def callback(indata, frames, time, status):
 
 with sd.InputStream(samplerate=samplerate, channels=channels,
     callback=callback):
+    with KeyPoller() as keyPoller:
+        while True:
+            # file.write(q.get())
+            test.append(q.get())
+            c = keyPoller.poll()
+            if not c is None:
+                    if c == " ":
+                        break
 
-    while True:
-        # file.write(q.get())
-        test.append(q.get())
-        if getkey() == " ":
-            break
+        
+            
+        
 
-np_list = np.array(test[-1])
+# Pre-Proc to playback
+np_list = np.array(test)
+np_list = np.concatenate(np_list)
+
 
 sd.play(np_list, samplerate)
 sd.wait()
-print(np_list)
+
 print("Im Done")
 
 
