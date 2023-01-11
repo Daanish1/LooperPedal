@@ -1,2 +1,2 @@
 # LooperPedal
-Looper pedal for audio looping using python
+Application to use as a Looper Pedal/Station for musicians.
