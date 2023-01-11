@@ -1,3 +1,7 @@
 # Audio files
 *.WAV
 *.mp3
+
+
+# Python
+__pycache__
