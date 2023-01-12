@@ -37,6 +37,9 @@ def main():
                 if not char_input is None:
                     if char_input == " ":
                         break
+
+    while (not sound_queue.empty()) > 0:
+        output_buffer.append(sound_queue.get())
                         
 
     print("Looping...")
